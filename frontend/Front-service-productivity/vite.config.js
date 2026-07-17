@@ -5,7 +5,9 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173,
+    // Puerto propio para no chocar con los otros frontends del proyecto
+    // (auth y tasks usan el 5173).
+    port: 5175,
     open: true,
   },
 });

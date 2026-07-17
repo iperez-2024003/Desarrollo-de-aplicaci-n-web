@@ -47,8 +47,10 @@ Cada funcion del microservicio `service-productivity` tiene su propia vista:
 | `getOverdueTasks`           | `GET /api/v1/productivity/overdue`         | `/vencidas`      |
 | `getPrioritySummary`        | `GET /api/v1/productivity/priority-summary`| `/prioridades`   |
 
-El token JWT lo emite el modulo de autenticacion (`service-auth`) y se envia en
-la cabecera `x-token`. Este frontend lo lee del almacenamiento compartido; no
+Este frontend consume **exclusivamente** el servicio de productividad; no realiza
+peticiones a `service-auth` ni a `service-tasks`. El token JWT lo emite el
+frontend de autenticacion y lo guarda en `localStorage` bajo la clave `token`;
+aqui simplemente se lee esa misma clave y se envia en la cabecera `x-token`. No
 implementa pantalla de login.
 
 ## Configuracion
@@ -69,10 +71,13 @@ VITE_DEV_TOKEN=
 
 ```bash
 pnpm install     # instalar dependencias
-pnpm dev         # entorno de desarrollo (http://localhost:5173)
+pnpm dev         # entorno de desarrollo (http://localhost:5175)
 pnpm build       # compilar para produccion
 pnpm preview     # previsualizar el build
 ```
 
-> Requiere que `service-tasks` (3000) y `service-productivity` (3002) esten en
-> ejecucion, ademas de un token JWT valido emitido por `service-auth` (3001).
+> Usa el puerto **5175** para no chocar con los frontends de auth y tasks (5173).
+>
+> Requiere que el servicio `service-productivity` (3002) este en ejecucion y que
+> exista un token JWT valido en `localStorage` (clave `token`), generado al
+> iniciar sesion desde el frontend de autenticacion.

@@ -1,14 +1,16 @@
 import { useSessionStore } from '../../store/session.store.js';
 
-export default function Topbar({ onMenuClick }) {
-  const { user } = useSessionStore();
+// Traduce el rol del token a una etiqueta legible.
+const ROLES = {
+  ADMIN_ROLE: 'Administrador',
+  USER_ROLE: 'Usuario',
+};
 
-  const initials = (user?.name || 'Usuario')
-    .split(' ')
-    .map((p) => p[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
+export default function Topbar({ onMenuClick }) {
+  const { session } = useSessionStore();
+
+  const roleLabel = ROLES[session?.role] || 'Usuario';
+  const initials = roleLabel.slice(0, 2).toUpperCase();
 
   return (
     <header className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white/80 px-4 py-3 backdrop-blur lg:px-8">
@@ -34,10 +36,10 @@ export default function Topbar({ onMenuClick }) {
 
       <div className="flex items-center gap-3">
         <div className="text-right">
-          <p className="text-sm font-semibold text-slate-700">
-            {user?.name || 'Usuario'}
+          <p className="text-sm font-semibold text-slate-700">{roleLabel}</p>
+          <p className="text-xs text-slate-400">
+            {session?.sub ? `ID: ${session.sub}` : 'Sesion activa'}
           </p>
-          <p className="text-xs text-slate-400">{user?.email || ''}</p>
         </div>
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">
           {initials}

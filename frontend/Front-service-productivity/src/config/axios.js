@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken, clearSession } from '../utils/storage.js';
+import { getToken } from '../utils/storage.js';
 
 const PRODUCTIVITY_API_URL =
   import.meta.env.VITE_PRODUCTIVITY_API_URL || 'http://localhost:3002/api/v1';
@@ -21,14 +21,10 @@ productivityApi.interceptors.request.use((config) => {
   return config;
 });
 
-// Si el token expira o es invalido (401), se limpia la sesion almacenada.
-// La reautenticacion es responsabilidad del modulo de autenticacion.
+// Si el token expira o es invalido, el backend responde 401. La reautenticacion
+// es responsabilidad del modulo de autenticacion (service-auth), por lo que aqui
+// solo se propaga el error para que la vista lo muestre; no se toca el token.
 productivityApi.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      clearSession();
-    }
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
