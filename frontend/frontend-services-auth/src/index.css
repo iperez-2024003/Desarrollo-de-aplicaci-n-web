@@ -1,0 +1,225 @@
+:root {
+  --color-paper: #eef1f6;
+  --color-ink: #1c2333;
+  --color-ink-soft: #5b6478;
+  --color-primary: #2542a6;
+  --color-primary-dark: #1b3283;
+  --color-accent: #e4572e;
+  --color-line: #d7dce6;
+  --color-danger: #c0392b;
+  --color-danger-bg: #fdecea;
+
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+  --radius-card: 10px;
+  --radius-field: 8px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+/*fondo del login*/
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Formulario con margen rojo estilo ficha de libreta */
+.login-card {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  background: #ffffff;
+  border-radius: var(--radius-card);
+  padding: 2.75rem 2.25rem 2.25rem 3rem;
+  box-shadow:
+    0 1px 2px rgba(28, 35, 51, 0.06),
+    0 18px 40px -18px rgba(28, 35, 51, 0.35);
+  animation: card-rise 0.5s ease-out;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.75rem;
+  width: 2px;
+  background: var(--color-accent);
+  opacity: 0.55;
+}
+
+.login-card__eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.login-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin-bottom: 1.75rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+}
+
+.form-input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  background: #fbfcfe;
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-field);
+  padding: 0.65rem 0.85rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.form-input::placeholder {
+  color: #a4acbd;
+}
+
+.form-input:hover {
+  border-color: #b7c0d4;
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 66, 166, 0.14);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  border-radius: var(--radius-field);
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-success {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: #1f6f42;
+  background: #eaf8ef;
+  border-radius: var(--radius-field);
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-register {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+}
+
+.form-register-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-register-link:hover {
+  text-decoration: underline;
+}
+
+.form-submit {
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-field);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.form-submit:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.form-submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* Animación de aparición del formulario*/
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-card {
+    animation: none;
+  }
+}
+
+/* pantalla pequeña */
+@media (max-width: 380px) {
+  .login-card {
+    padding: 2.25rem 1.5rem 1.75rem 2.25rem;
+  }
+
+  .login-card::before {
+    left: 1.1rem;
+  }
+}
