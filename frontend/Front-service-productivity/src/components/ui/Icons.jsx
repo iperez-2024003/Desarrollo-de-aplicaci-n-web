@@ -16,13 +16,6 @@ export const LogoIcon = ({ className = 'h-6 w-6' }) => (
   </svg>
 );
 
-export const MailIcon = ({ className = 'h-5 w-5' }) => (
-  <svg {...base} className={className}>
-    <rect x="3" y="5" width="18" height="14" rx="2" />
-    <path d="m3 7 9 6 9-6" />
-  </svg>
-);
-
 export const LockIcon = ({ className = 'h-5 w-5' }) => (
   <svg {...base} className={className}>
     <rect x="4" y="11" width="16" height="9" rx="2" />
@@ -64,14 +57,6 @@ export const FlagIcon = ({ className = 'h-5 w-5' }) => (
 export const CheckIcon = ({ className = 'h-5 w-5' }) => (
   <svg {...base} className={className}>
     <path d="M4 12.5 9 17.5 20 6.5" />
-  </svg>
-);
-
-export const LogoutIcon = ({ className = 'h-5 w-5' }) => (
-  <svg {...base} className={className}>
-    <path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3" />
-    <path d="M10 12h9" />
-    <path d="m15 8 4 4-4 4" />
   </svg>
 );
 

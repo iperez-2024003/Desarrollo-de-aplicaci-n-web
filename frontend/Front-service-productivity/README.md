@@ -9,8 +9,12 @@ metricas personales del usuario autenticado.
 - **React 18** + **Vite** — interfaz y bundler
 - **Tailwind CSS** — estilos
 - **React Router** — enrutamiento y rutas protegidas
-- **Zustand** — estado global de autenticacion
+- **Zustand** — estado global de la sesion (solo lectura)
 - **Axios** — cliente HTTP con interceptores JWT
+
+> **Nota:** el inicio de sesion NO forma parte de este frontend; lo gestiona el
+> modulo de autenticacion (`service-auth`). Aqui solo se consume el token JWT ya
+> emitido, enviandolo en la cabecera `x-token`.
 
 ## Arquitectura
 
@@ -43,8 +47,9 @@ Cada funcion del microservicio `service-productivity` tiene su propia vista:
 | `getOverdueTasks`           | `GET /api/v1/productivity/overdue`         | `/vencidas`      |
 | `getPrioritySummary`        | `GET /api/v1/productivity/priority-summary`| `/prioridades`   |
 
-La autenticacion se realiza contra `service-auth`
-(`POST /api/v1/auth/login`) y el token JWT se envia en la cabecera `x-token`.
+El token JWT lo emite el modulo de autenticacion (`service-auth`) y se envia en
+la cabecera `x-token`. Este frontend lo lee del almacenamiento compartido; no
+implementa pantalla de login.
 
 ## Configuracion
 
@@ -55,8 +60,9 @@ cp .env.example .env
 ```
 
 ```env
-VITE_AUTH_API_URL=http://localhost:3001/api/v1
 VITE_PRODUCTIVITY_API_URL=http://localhost:3002/api/v1
+# Solo para pruebas aisladas en desarrollo: pega un token JWT valido.
+VITE_DEV_TOKEN=
 ```
 
 ## Ejecucion
@@ -68,5 +74,5 @@ pnpm build       # compilar para produccion
 pnpm preview     # previsualizar el build
 ```
 
-> Requiere que `service-auth` (3001), `service-tasks` (3000) y
-> `service-productivity` (3002) esten en ejecucion.
+> Requiere que `service-tasks` (3000) y `service-productivity` (3002) esten en
+> ejecucion, ademas de un token JWT valido emitido por `service-auth` (3001).

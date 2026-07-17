@@ -1,12 +1,15 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthStore } from '../../store/auth.store.js';
+import { Outlet } from 'react-router-dom';
+import { useSessionStore } from '../../store/session.store.js';
+import NoSession from '../../pages/NoSession.jsx';
 
-// Protege las rutas privadas: si no hay token, redirige al login.
+// Protege las rutas privadas. Si no hay token de sesion, muestra un aviso.
+// El inicio de sesion se realiza en el modulo de autenticacion (service-auth),
+// no en este frontend.
 export default function ProtectedRoute() {
-  const { isAuthenticated } = useAuthStore();
+  const { hasSession } = useSessionStore();
 
-  if (!isAuthenticated()) {
-    return <Navigate to="/login" replace />;
+  if (!hasSession()) {
+    return <NoSession />;
   }
 
   return <Outlet />;

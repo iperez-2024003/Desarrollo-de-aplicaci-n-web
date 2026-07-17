@@ -1,8 +1,7 @@
-import { useAuthStore } from '../../store/auth.store.js';
-import { LogoutIcon } from '../ui/Icons.jsx';
+import { useSessionStore } from '../../store/session.store.js';
 
 export default function Topbar({ onMenuClick }) {
-  const { user, logout } = useAuthStore();
+  const { user } = useSessionStore();
 
   const initials = (user?.name || 'Usuario')
     .split(' ')
@@ -43,14 +42,6 @@ export default function Topbar({ onMenuClick }) {
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">
           {initials}
         </div>
-        <button
-          onClick={logout}
-          className="rounded-lg p-2 text-slate-500 transition hover:bg-red-50 hover:text-red-600"
-          title="Cerrar sesion"
-          aria-label="Cerrar sesion"
-        >
-          <LogoutIcon />
-        </button>
       </div>
     </header>
   );
