@@ -1,0 +1,9 @@
+export const SUPER_ADMIN_ROLE = 'SUPER_ADMIN_ROLE';
+export const MANAGER_ROLE = 'MANAGER_ROLE';
+export const USER_ROLE = 'USER_ROLE';
+
+export const ALLOWED_ROLES = [
+  SUPER_ADMIN_ROLE,
+  MANAGER_ROLE,
+  USER_ROLE,
+];
