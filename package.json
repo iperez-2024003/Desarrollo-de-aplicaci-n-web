@@ -1,0 +1,16 @@
+{
+  "name": "sistema-gestion-tareas",
+  "version": "1.0.0",
+  "description": "Orquestador de microservicios Sistema de Gestion de Tareas",
+  "private": true,
+  "packageManager": "pnpm@10.29.2",
+  "scripts": {
+    "dev:auth": "pnpm --dir service-auth dev",
+    "dev:tasks": "pnpm --dir service-tasks dev",
+    "dev:productivity": "pnpm --dir service-productivity dev",
+    "dev:frontend": "pnpm --dir frontend dev",
+    "install:all": "pnpm --dir service-auth install && pnpm --dir service-tasks install && pnpm --dir service-productivity install && pnpm --dir frontend install",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down"
+  }
+}
