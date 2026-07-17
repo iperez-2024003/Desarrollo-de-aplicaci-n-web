@@ -18,7 +18,7 @@ export const validateJWT = async (req, res, next) => {
     token = token.replace(/^Bearer\s+/i, '');
 
     const decoded = await verifyJWT(token);
-
+//hola
     req.userId = decoded.sub;
     req.userRole = decoded.role || 'USER_ROLE';
 
